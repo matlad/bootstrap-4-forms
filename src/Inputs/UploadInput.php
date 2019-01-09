@@ -11,6 +11,7 @@ namespace Czubehead\BootstrapForms\Inputs;
 
 
 use Czubehead\BootstrapForms\BootstrapRenderer;
+use Czubehead\BootstrapForms\BootstrapUtils;
 use Czubehead\BootstrapForms\Enums\RendererConfig;
 use Nette\Forms\Controls\UploadControl;
 use Nette\Utils\Html;
@@ -55,19 +56,21 @@ class UploadInput extends UploadControl implements IValidationInput
 	 */
 	public function getControl()
 	{
-		$control = parent::getControl();
-		$control->class = 'custom-file-input';
+        $control = parent::getControl();
+        BootstrapUtils::standardizeClass($control);
+        $wrapperClass = $control->class;
+        $wrapperClass[] = 'custom-file';
+        $control->class = 'custom-file-input';
 
-		$el = Html::el('div', ['class' => ['custom-file']]);
-		$el->addHtml($control);
-		$el->addHtml(
-			Html::el('label', [
-				'class' => ['custom-file-label'],
-				'for'   => $this->getHtmlId(),
-			])->setText($this->buttonCaption)
-		);
-
-		return $el;
+        $el = Html::el('div', ['class' => $wrapperClass]);
+        $el->addHtml($control);
+        $el->addHtml(
+            Html::el('label', [
+                'class' => ['custom-file-label'],
+                'for'   => $this->getHtmlId(),
+            ])->setText($this->buttonCaption)
+        );
+        return $el;
 	}
 
 	/**
