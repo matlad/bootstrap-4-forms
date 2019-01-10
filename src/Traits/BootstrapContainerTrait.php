@@ -247,8 +247,8 @@ trait BootstrapContainerTrait
 	/**
 	 * @param string $name
 	 * @param string $label
-	 * @param null   $cols ignored
-	 * @param null   $rows ignored
+	 * @param int|null   $cols ignored
+	 * @param int|null   $rows ignored
 	 * @return TextAreaInput
 	 */
 	public function addTextArea($name, $label = NULL, $cols = NULL, $rows = NULL)
